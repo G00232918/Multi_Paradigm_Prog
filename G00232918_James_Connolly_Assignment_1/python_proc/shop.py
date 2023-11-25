@@ -100,9 +100,9 @@ def print_customer(customer, shop):
                 item.quantity = int(item.quantity)
 
                 try:
-                    quantity_purchased = check_prod_stock(prod.product.name, item.quantity, shop)
-                    cost = quantity_purchased * shop_price 
-                    prod.quantity -= quantity_purchased
+                    quantity_chosen = check_prod_stock(prod.product.name, item.quantity, shop)
+                    cost = quantity_chosen * shop_price 
+                    prod.quantity -= quantity_chosen
                     # if the customer budget is less than the cost
                     if customer.budget < cost:
                         print(f"** Sorry! You don't have enough money left for {choice_name}! **")
@@ -116,7 +116,7 @@ def print_customer(customer, shop):
                     print(f"PRODUCT NAME: {item.product.name}\n")
                     print(f"PRODUCT PRICE: €{prod.product.price:.2f}\n")
                     print(f"QUANTITY REQUIRED: {item.quantity}\n")
-                    print(f"QUANTITY PURCHASED: {quantity_purchased}\n")
+                    print(f"QUANTITY PURCHASED: {quantity_chosen}\n")
                     print(f"TOTAL ITEM COST: €{cost:.2f}\n")
                     print(f"ADJUSTED BUDGET: €{customer.budget:.2f}\n")
                     print(f"(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})\n")

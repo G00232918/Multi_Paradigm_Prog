@@ -29,14 +29,14 @@ struct Customer {
 // Printing product info
 void printProduct(struct Product p)
 {
+    // Print information about a product
     printf("PRODUCT NAME: %s \nPRODUCT PRICE: %.2f\n", p.name, p.price);
     printf("-------------\n");
 }
 
-// Print info about each customer and their shopping list
-
 void printCustomer(struct Customer c)
 {
+    // Print information about a customer and their shopping list
     printf("CUSTOMER NAME: %s \nCUSTOMER BUDGET: %.2f\n", c.name, c.budget);
     printf("-------------\n");
     for (int i = 0; i < c.index; i++)
@@ -48,7 +48,7 @@ void printCustomer(struct Customer c)
     }
 }
 
-// Reads in the stock list
+// Reads in the stock list from a file
 struct Shop createAndStockShop()
 {
     FILE* fp;
@@ -56,7 +56,7 @@ struct Shop createAndStockShop()
     size_t len = 0;
     size_t read;
 
-    // Opens the stock list from the stock csv
+    // Open the file containing stock information
     fp = fopen("../stock.csv", "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
@@ -65,10 +65,12 @@ struct Shop createAndStockShop()
     read = getline(&line, &len, fp);
     float cash = atof(line);
 
-    // Intialise the shop with the cash
+    // Initialize the shop with cash
     struct Shop shop = { cash };
-    // Parsing each line of the stock file
+
+    // Read each line in the file to populate the shop's stock
     while ((read = getline(&line, &len, fp)) != -1) {
+        // Parsing each line of the stock file
         char* n = strtok(line, ",");
         char* p = strtok(NULL, ",");
         char* q = strtok(NULL, ",");
@@ -80,7 +82,8 @@ struct Shop createAndStockShop()
         struct ProductStock stockItem = { product, quantity };
         shop.stock[shop.index++] = stockItem;
     }
-    // Close the file and returns the shop
+
+    // Close the file and return the shop
     fclose(fp);
     return shop;
 }
@@ -88,7 +91,7 @@ struct Shop createAndStockShop()
 // List of items in stock with quantities
 void printShop(struct Shop s)
 {
-    // Print info about the shop's stock
+    // Print information about the shop's stock
     printf("In stock list\n");
     printf("Shop has %.2f in cash\n", s.cash);
     for (int i = 0; i < s.index; i++)
@@ -98,8 +101,8 @@ void printShop(struct Shop s)
     }
 }
 
-// Check if the product is in stock
-int checkProductStock(char* n, int order)
+// Check if the product is in stock and update the stock
+int checkProductStock(char* n, int order, struct Shop s)
 {
     for (int i = 0; i < s.index; i++) {
         struct ProductStock product = s.stock[i];
@@ -129,14 +132,17 @@ struct Customer createCustomer(char* path_to_customer)
     size_t len = 0;
     size_t read;
 
+    struct Customer c;
     c.index = 0;
-    // Insert customer csv files
+
+    // Open the file containing customer information
     fp = fopen(path_to_customer, "r");
     if (fp == NULL) {
         printf("Can't access customer file. Please try again!");
         exit(EXIT_FAILURE);
     }
-    //Reads the customer's bane and budget
+
+    // Read the customer's name and budget
     read = getline(&line, &len, fp);
     char* n = strtok(line, ",");
     char* b = strtok(NULL, ",");
@@ -147,7 +153,7 @@ struct Customer createCustomer(char* path_to_customer)
     c.budget = custBudget;
     struct ProductStock custShopList;
 
-    // Read each line to populate the customer list
+    // Read each line in the file to populate the customer's shopping list
     while ((read = getline(&line, &len, fp)) != -1) {
         char* n = strtok(line, ",");
         char* q = strtok(NULL, ",");
@@ -155,22 +161,24 @@ struct Customer createCustomer(char* path_to_customer)
         strcpy(name, n);
         int quantity = atoi(q);
         custShopList.product.name = name;
+        // The function findProductPrice is referenced but not provided in the code
         custShopList.product.price = findProductPrice(name);
         custShopList.quantity = quantity;
         c.shoppingList[c.index++] = custShopList;
     }
 
+    // Close the file and return the customer
+    fclose(fp);
     return c;
 }
 
 // Main function
 int main(void)
 {
+    // Create and stock the shop
     struct Shop shop = createAndStockShop();
+    // Print information about the shop
     printShop(shop);
 
     return 0;
 }
-
-// References
-// Read in contents of a csv file - https://stackoverflow.com/questions/60937894/c-print-contents-of-a-csv-file
