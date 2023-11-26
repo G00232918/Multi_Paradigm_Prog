@@ -226,12 +226,12 @@ def main():
             print(customer1)
             mainMenu()
         elif (choice == "3"):
-            customer2 = Customer("../customer2.csv")
+            customer2 = Customer("G00232918_James_Connolly_Assignment_1\customer2.csv")
             customer2.printCustomer()
             print(customer2)
             mainMenu()
         elif (choice == "4"):
-            customer3 = Customer("../customer3.csv")
+            customer3 = Customer("G00232918_James_Connolly_Assignment_1\customer3.csv")
             customer3.printCustomer()
             print(customer3)
             mainMenu()

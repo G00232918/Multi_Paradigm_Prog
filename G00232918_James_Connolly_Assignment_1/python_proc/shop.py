@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import List
 import csv
 
-# setting the data classes for shop elements
+# Setting the data classes for shop elements
 @dataclass
 class Product:
     name: str
@@ -25,7 +25,7 @@ class Customer:
     shopping_list: List[ProductStock] = field(default_factory=list)
 
 
-# function to create and stock the shop from the stock csv
+# Function to create and stock the shop from the stock csv
 def create_and_stock_shop():
     s = Shop()
     with open('G00232918_James_Connolly_Assignment_1\stock.csv') as csv_file:
