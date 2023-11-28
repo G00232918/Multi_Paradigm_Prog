@@ -146,12 +146,12 @@ def liveMode(shop):
         for index, prod in enumerate(shop.stock, start=1):
             print(f"{index} - {prod.product.name} @ €{prod.product.price:.2f} each")
 
-        print("*9* - Finish shopping and print total bill")
-        print("*10* - Exit Live Mode\n")
+        print("*23* - Finish shopping and print total bill")
+        print("*24* - Exit Live Mode\n")
 
         choice = int(input("Please make your selection: "))
 
-        if choice == 9:
+        if choice == 23:
             print("\n--------------------\n")
             print("Come again soon and have a nice day!\n")
             print("--------------------\n")
@@ -183,7 +183,7 @@ def liveMode(shop):
             print(f"(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})")
             print(f"TOTAL BILL SO FAR: €{totalBill:.2f}")
 
-        elif choice == 10:
+        elif choice == 24:
             print("\n--------------------\n")
             print(f"Your total bill is €{totalBill:.2f}\n")
             print("Thank you for your custom. Please come again soon!\n")

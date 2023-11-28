@@ -233,12 +233,12 @@ void liveMode() {
         // Switch statement to handle different user selections
         switch (select) {
             // Option 9 represents finishing shopping and printing the total bill
-            case 9: {
+            case 23: {
                 printf("Come again soon and have a nice day!\n");
                 break;
             }
             // Option 10 represents exiting live mode
-            case 10: {
+            case 24: {
                 printf("Your total bill is €%.2f.\n", totalBill);
                 printf("Thank you for your custom. Please come again soon!\n");
                 break;
@@ -289,7 +289,7 @@ void liveMode() {
             }
         }
         // Repeat the loop until the user selects 9 or 10
-    } while (select != 9 && select != 10);
+    } while (select != 23 && select != 24);
 }
 
 // Main Menu with the options to select from

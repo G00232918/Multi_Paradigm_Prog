@@ -154,10 +154,10 @@ class Shop:
             # For loop for products in stock
             for prod in self.stock: 
                 print(f"{shop.stock.index(prod) + 1} - {prod.product.name} @ €{prod.product.price:.2f} each")
-            print("*9* - Finish shopping and print total bill")
-            print("*10* - Exit Live Mode\n")
+            print("*23* - Finish shopping and print total bill")
+            print("*24* - Exit Live Mode\n")
             choice = int(input("Please make your selection: "))
-            if choice == 9:
+            if choice == 23:
                 print("\n--------------------\n")
                 print("** Come again soon and have a nice day! **\n")
                 print("--------------------\n")
@@ -187,7 +187,7 @@ class Shop:
                 print(f"(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})")
                 print(f"- - - - - - - - - - - - - -\n")
                 print(f"TOTAL BILL SO FAR: €{totalBill:.2f}") 
-            elif choice == 10:
+            elif choice == 24:
                 print("\n--------------------\n")
                 print(f"Your total bill is €{totalBill:.2f}\n")
                 print("** Thank you for your custom. Please come again soon! **\n")
@@ -195,7 +195,8 @@ class Shop:
                 break
             else:
                 print("** Invalid entry - please try again! **")
-        shop.cash += totalBill # updates shop float
+        # Updates shop float
+        shop.cash += totalBill 
         mainMenu()
 
 # main menu on arrival
