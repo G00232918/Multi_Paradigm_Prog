@@ -8,6 +8,7 @@ class Product:
         self.price = price
     # Return a string representation of product and price
     def __repr__(self):
+        # Format for each product in stock when printShop function runs
         return f'---------------\nPRODUCT NAME: {self.name}\nPRODUCT PRICE: €{self.price:.2f}\n- - - - - - - -'
 
 # productstock class
@@ -60,7 +61,7 @@ class Customer:
     def __repr__(self):
         print('')
         float_format = "{:.2f}".format(self.budget)
-        str = f"\n////////////////////////\n{self.name}'s shopping list\n////////////////////////\n\n"
+        str = f"\n{self.name}'s shopping list\n"
         str += f"BUDGET: €{float_format}"
         totalBill = 0
         # For loop each shopping item
@@ -91,11 +92,11 @@ class Customer:
                         shop.cash += cost1
                         # Prints the item
                         str += f"\n{item}" 
-                        str += f"- - - - - - - - \nQUANTITY PURCHASED: {quantity_chosen}"
+                        str += f"QUANTITY PURCHASED: {quantity_chosen}"
                         str += f"\nTOTAL ITEM COST: €{cost1:.2f}\n"
                         str += f"ADJUSTED BUDGET: €{self.budget:.2f}"
                         str += f"\n(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})"
-                        str += f"TOTAL BILL SO FAR: €{totalBill:.2f}"
+                        str += f"\nTOTAL BILL SO FAR: €{totalBill:.2f}"
                     prod.quantity -= quantity_chosen  
         str += f"\n\nTOTAL BILL: €{totalBill:.2f}"
         str += f"\nBUDGET REMAINING: €{self.budget:.2f}\n"
@@ -147,9 +148,7 @@ class Shop:
     def liveMode(self):
         budget = float(input("What is your budget? \n"))
         totalBill = 0
-        print("\n/////////////////////////////////////////")
         print("Welcome to the OOP Python shop LIVE SHOPPING MODE!")
-        print("/////////////////////////////////////////\n")
         while True:
             print(f"Your current budget is €{budget:.2f}.\n\nPlease select what you would like to buy from the list below:\n")
             # For loop for products in stock

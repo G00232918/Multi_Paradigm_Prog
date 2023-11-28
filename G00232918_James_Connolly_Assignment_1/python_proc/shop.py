@@ -40,7 +40,7 @@ def create_and_stock_shop():
 
 # print the product info, name and quantity
 def print_product(p):
-    print(f'\nPRODUCT NAME: {p.name} \nPRODUCT PRICE: {p.price}')
+    print(f'---------------\nPRODUCT NAME: {p.name} \nPRODUCT PRICE: {p.price}')
 
 # print the shop cash and quantities of stock
 def print_shop(s):
@@ -113,6 +113,7 @@ def print_customer(customer, shop):
                         customer.budget -= cost
                         shop.cash += cost
 
+                    print((f"---------------\n"))
                     print(f"PRODUCT NAME: {item.product.name}\n")
                     print(f"PRODUCT PRICE: €{prod.product.price:.2f}\n")
                     print(f"QUANTITY REQUIRED: {item.quantity}\n")
@@ -120,6 +121,7 @@ def print_customer(customer, shop):
                     print(f"TOTAL ITEM COST: €{cost:.2f}\n")
                     print(f"ADJUSTED BUDGET: €{customer.budget:.2f}\n")
                     print(f"(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})\n")
+                    print((f"---------------\n"))
                     
                 # I put this in because I was getting duplicates when selecting customer csvs
                 except ValueError as e:
@@ -194,7 +196,7 @@ def liveMode(shop):
     shop.cash += totalBill
 
 def mainMenu():
-    print("Welcome to the python proc shop\n")
+    print("\n***Welcome to the python proc shop***\n")
     print("Please select from the following: \n")
     print("1 - Show shop's current stock and float")
     print("2 - John's shopping list")
