@@ -47,7 +47,7 @@ struct Shop createAndStockShop() {
     size_t read;
 
     // Opens the stock list from the stock csv
-    fp = fopen("../stock.csv", "r");
+    fp = fopen("G00232918_James_Connolly_Assignment_1\\stock.csv", "r");
     if (fp == NULL) {
         // (GeeksforGeeks, 2017a)
         perror("Cannot open the stock file");
@@ -74,7 +74,6 @@ struct Shop createAndStockShop() {
         shop.stock[shop.index++] = stockItem;
     }
     // Close the file and return the shop
-    fclose(fp);
     return shop;
 }
 
@@ -302,9 +301,9 @@ void mainMenu(struct Shop s) {
         printf("/////////////////////\n");
         printf("\nPlease select from the following:\n\n");
         printf("1 - Show shop's current stock and float\n");
-        printf("2 - Shop with Caoimhin's shopping list\n");
-        printf("3 - Shop with PJs's shopping list\n");
-        printf("4 - Shop with JimBob's shopping list\n");
+        printf("2 - John's shopping list\n");
+        printf("3 - Tony's shopping list\n");
+        printf("4 - Bob's shopping list\n");
         printf("5 - Shop in Live Mode\n");
         printf("0 - Exit\n");
         printf("\nPlease make a selection: ");
@@ -315,17 +314,17 @@ void mainMenu(struct Shop s) {
                 break;
             }
             case 2: {
-                struct Customer customer1 = createCustomer("../customer1.csv");
+                struct Customer customer1 = createCustomer("G00232918_James_Connolly_Assignment_1\\customer1.csv");
                 printCustomer(true);
                 break;
             }
             case 3: {
-                struct Customer customer2 = createCustomer("../customer2.csv");
+                struct Customer customer2 = createCustomer("G00232918_James_Connolly_Assignment_1\\customer2.csv");
                 printCustomer(true);
                 break;
             }
             case 4: {
-                struct Customer customer3 = createCustomer("../customer3.csv");
+                struct Customer customer3 = createCustomer("G00232918_James_Connolly_Assignment_1\\customer3.csv");
                 printCustomer(true);
                 break;
             }

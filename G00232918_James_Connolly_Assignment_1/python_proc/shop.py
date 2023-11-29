@@ -38,18 +38,18 @@ def create_and_stock_shop():
             s.stock.append(ps)
     return s
 
-# print the product info, name and quantity
+# Print the product name and price
 def print_product(p):
-    print(f'---------------\nPRODUCT NAME: {p.name} \nPRODUCT PRICE: {p.price}')
+    print(f'---------------\nPRODUCT NAME: {p.name} \nPRODUCT PRICE: {p.price}\n--------------')
 
-# print the shop cash and quantities of stock
+# Print the product with the quantity
 def print_shop(s):
     print(f'Shop has {s.cash} in cash')
     for item in s.stock:
         print_product(item.product)
         print(f'The Shop has {item.quantity} of the above')
 
-# check shop stock
+# Function to check product stock
 def check_prod_stock(n, quantity, shop):
     for item in shop.stock:
         if n == item.product.name:
@@ -57,12 +57,13 @@ def check_prod_stock(n, quantity, shop):
                 item.quantity -= quantity
                 return quantity
             elif quantity > item.quantity:
-                # adjust the quantity available
+                # Adjust the quantity available
                 quantity = int(item.quantity)
                 item.quantity = 0
-                # error message if not in stock
+                # Error message if not in stock
                 raise ValueError(f"We don't have that many {n} in stock. We can only give you {quantity}")
-    # error if the product cannot be found
+    # Error if the product cannot be found
+    # (Bose, 2023)
     raise ValueError(f"We don't have {n} in stock.")
 
 # reads in the customer lists created
@@ -79,7 +80,7 @@ def read_customer(file_path):
             c.shopping_list.append(ps)
         return c
 
-# function to to print customer information
+# Function to to print customer information
 def print_customer(customer, shop):
     print(f"{customer.name}'s shopping list")
     print(f"BUDGET: €{customer.budget:.2f}")
@@ -88,15 +89,15 @@ def print_customer(customer, shop):
     for item in customer.shopping_list:
         found_match = False
         for prod in shop.stock:
-            # remove any unwanted white spaces 
+            # Remove any unwanted white spaces 
             if item.product.name.strip().lower() == prod.product.name.strip().lower():
-                # if the match is found
+                # If the match is found
                 found_match = True
-                # record the name of match
+                # Record the name of match
                 choice_name = item.product.name
-                # record the price
+                # Record the price
                 shop_price = prod.product.price
-                # convert the quantity to an integer
+                # Convert the quantity to an integer
                 item.quantity = int(item.quantity)
 
                 try:
@@ -248,3 +249,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# References
+# Bose, S. (2023). Handling ValueError in Python: Detecting Strings and Integers - AskPython. [online] AskPython. Available at: https://www.askpython.com/python/examples/
+# handling-valueerror-detecting-strings-integers [Accessed 22 Nov. 2023].

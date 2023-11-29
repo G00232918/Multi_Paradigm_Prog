@@ -9,7 +9,7 @@ class Product:
     # Return a string representation of product and price
     def __repr__(self):
         # Format for each product in stock when printShop function runs
-        return f'---------------\nPRODUCT NAME: {self.name}\nPRODUCT PRICE: €{self.price:.2f}\n- - - - - - - -'
+        return f'---------------\nPRODUCT NAME: {self.name}\nPRODUCT PRICE: €{self.price:.2f}\n--------------'
 
 # productstock class
 class ProductStock:
@@ -42,13 +42,16 @@ class Customer:
             # Finding the customer name on first row
             self.name = first_row[0]
             # Finding the customer budget
-            self.budget = float(first_row[1]) # finds customer budget
+            self.budget = float(first_row[1]) 
             for row in csv_reader:
-                name = row[0] # finds product name
-                quantity = float(row[1]) # finds product quantity
+                # Finds the product name
+                name = row[0]
+                # Finds quantity 
+                quantity = float(row[1])
                 p = Product(name)
                 ps = ProductStock(p, quantity)
-                self.shoppingList.append(ps) # creates shopping list
+                # Append to the shopping list
+                self.shoppingList.append(ps) 
                 
     def printCustomer(self):
         stock = shop.stock
@@ -74,8 +77,10 @@ class Customer:
                     item.product.price = prod.product.price
                     shopPrice = prod.product.price
                     item.quantity = int(item.quantity)
-                    quantity_chosen = shop.checkProductStock(choice_name, item.quantity) # checks availability
-                    cost1 = quantity_chosen * shopPrice # calculates cost to be paid
+                    # Checking is the quantity in stock
+                    quantity_chosen = shop.checkProductStock(choice_name, item.quantity) 
+                    # Calculate the cost of the quantity chosen
+                    cost1 = quantity_chosen * shopPrice 
                     if quantity_chosen < item.quantity:
                         str += f"\n---------------"
                         str += f"\n** We don't have that much {choice_name} in stock. We only have {quantity_chosen} **"                   
@@ -111,40 +116,49 @@ class Shop:
         with open(path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             first_row = next(csv_reader)
-            self.cash = float(first_row[0]) # finds cash float
+            # Find the cash float from the file
+            self.cash = float(first_row[0])
             for row in csv_reader:
-                p = Product(row[0], float(row[1])) # finds product name
-                ps = ProductStock(p, float(row[2])) # finds product quantity
-                self.stock.append(ps) # creates a stock list
+                # Find the product name
+                p = Product(row[0], float(row[1])) 
+                # Find the product quantity
+                ps = ProductStock(p, float(row[2])) 
+                # From the stock it creates the list
+                self.stock.append(ps) 
     
-    # prints current float contents of shop
+    # Prints current float contents of shop
     def printShop(self):
         print("Stock list")
         print(f"Shop has a float of €{shop.cash:.2f}")
+        # For loop to check the each item
         for item in self.stock:
             curr_stock = int(item.quantity)
             print(item.product)
             print(f"The shop has {curr_stock} in stock")
     
-    # checks availability of product
+    # Checks availability of product
     def checkProductStock(self, n,q):
        for item in shop.stock:
            if n == item.product.name:
                if q <= item.quantity:
-                   item.quantity = item.quantity - q # updates stock quantity
+                   # Stock quantity updated
+                   item.quantity = item.quantity - q 
                    if item.quantity < 1:
-                       item.quantity = 0 # makes sure stock quantity doesn't go below zero
+                       # To set the quantity to zero
+                       item.quantity = 0 
                    return q
-               elif q > item.quantity: # if amount required is more than stock available,
-                   q = int(item.quantity) # customer takes all of the stock!
+               # If the quantity is more than what is in stock
+               elif q > item.quantity:
+                   # If all the stock is taken
+                   q = int(item.quantity) 
                    item.quantity = 0
                    if q < 1:
-                       q = 0 # making sure number doesn't go below zero
+                       q = 0 
                        print("---------------")
                        print(f"** We don't have that many {n} in stock. We can only give you {q} **")
                    return q
 
-    # live mode
+    # Live mode
     def liveMode(self):
         budget = float(input("What is your budget? \n"))
         totalBill = 0
@@ -177,18 +191,21 @@ class Shop:
                 if budget < totalCost:
                     print(f"\n** You don't have enough money for {choice_name}! **\n")
                     continue
-                budget -= totalCost # updates budget
-                totalBill += totalCost # updates total bill
+                # Updates the budget
+                budget -= totalCost 
+                # Updates the total bill
+                totalBill += totalCost 
+                # Updates the cash float
                 shop.cash += totalBill # updates shop cash float
                 print(f"QUANTITY REQUIRED: {quant}")
                 print(f"QUANTITY PURCHASED: {purch_quan}")
                 print(f"TOTAL ITEM COST: €{totalCost:.2f}")
                 print(f"ADJUSTED BUDGET: €{budget:.2f}")
                 print(f"(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})")
-                print(f"- - - - - - - - - - - - - -\n")
+                print(f"----------------------\n")
                 print(f"TOTAL BILL SO FAR: €{totalBill:.2f}") 
             elif choice == 24:
-                print("\n--------------------\n")
+                print("\n------------------\n")
                 print(f"Your total bill is €{totalBill:.2f}\n")
                 print("** Thank you for your custom. Please come again soon! **\n")
                 print("--------------------\n")
@@ -214,6 +231,7 @@ def mainMenu():
 shop = Shop("G00232918_James_Connolly_Assignment_1\stock.csv")
 
 def main():
+    # (www.javatpoint.com, n.d.)
     mainMenu()
     while True:
         choice = input("Please make a selection: ")
@@ -249,3 +267,8 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
+
+# References 
+# www.javatpoint.com. (n.d.). Menu-Driven Programs in Python - Javatpoint. [online] Available at: 
+# https://www.javatpoint.com/menu-driven-programs-in-python [Accessed 23 Nov. 2023].
