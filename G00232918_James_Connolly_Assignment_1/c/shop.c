@@ -302,9 +302,9 @@ void printCustomer(bool upd) {
 void mainMenu(struct Shop s) {
     int menuSelect;
     do {
-        printf("\n***********************\\n");
+        printf("\n***********************\n");
         printf("WELCOME TO THE C SHOP\n");
-        printf("***********************\\n");
+        printf("***********************\n");
         printf("\nPlease select from the following:\n\n");
         printf("1 - Show shop's current stock and float\n");
         printf("2 - John's shopping list\n");

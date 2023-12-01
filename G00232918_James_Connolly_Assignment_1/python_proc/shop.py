@@ -199,7 +199,7 @@ def liveMode(shop):
 
 def mainMenu():
     print("\n***********************\n");
-    print("WELCOME TO THE OOP Pythom SHOP\n");
+    print("WELCOME TO THE PYTHON SHOP\n");
     print("***********************\n");
     print("Please select from the following: \n")
     print("1 - Show shop's current stock and float")
