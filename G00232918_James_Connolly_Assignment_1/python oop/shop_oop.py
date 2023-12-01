@@ -197,13 +197,14 @@ class Shop:
                 totalBill += totalCost 
                 # Updates the cash float
                 shop.cash += totalBill # updates shop cash float
+                print((f"---------------\n"))
                 print(f"QUANTITY REQUIRED: {quant}")
                 print(f"QUANTITY PURCHASED: {purch_quan}")
                 print(f"TOTAL ITEM COST: €{totalCost:.2f}")
                 print(f"ADJUSTED BUDGET: €{budget:.2f}")
                 print(f"(ADJUSTED SHOP FLOAT: €{shop.cash:.2f})")
-                print(f"----------------------\n")
                 print(f"TOTAL BILL SO FAR: €{totalBill:.2f}") 
+                print((f"---------------\n"))
             elif choice == 24:
                 print("\n------------------\n")
                 print(f"Your total bill is €{totalBill:.2f}\n")

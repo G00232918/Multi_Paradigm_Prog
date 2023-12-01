@@ -182,78 +182,76 @@ struct Customer createCustomer(char* path_to_customer) {
 
 // *** LIVE MODE ***
 void liveMode() {
-    double myBudget, totalCost, totalBill;
-    int quantity_requested, quantity_chosen, select;
+    // Total bill had to be set to 0.0 as the program was going into
+    // continous loop when selecting option 5
+    double myBudget, totalCost, totalBill = 0.0;
+    int quantity_requested, quantity_chosen, select = 0; // Initialize 'select' variable
     printf("What is your budget?\n");
     scanf("%lf", &myBudget);
     do {
-        printf("\n/////////////////////////////////////////\n");
-            printf("Welcome to the C shop LIVE SHOPPING MODE!\n");
-            printf("/////////////////////////////////////////\n\n");
-            printf("Your current budget is €%.2f.\n\nPlease select what you would like to buy from the list below:\n\n", myBudget);
-            for(int i=0; i < s.index; i++) {
-                printf("%d - %s @ €%.2f each.\n", i + 1, s.stock[i].product.name, findProductPrice(s.stock[i].product.name));
-            }
-            switch(select) {
-            // Option 23 represents finishing shopping and printing the total bill
+        printf("\n***********************\n");
+        printf("Welcome to the C shop LIVE SHOPPING MODE!\n");
+        printf("***********************\n\n");
+        printf("Your current budget is €%.2f.\n\nPlease select what you would like to buy from the list below:\n\n", myBudget);
+        for(int i=0; i < s.index; i++) {
+            printf("%d - %s @ €%.2f each.\n", i + 1, s.stock[i].product.name, findProductPrice(s.stock[i].product.name));
+        }
+        printf("Enter your choice (23 to print total bill, 24 to exit): ");
+        scanf("%d", &select); // Read the user's selection
+
+        switch(select) {
             case 23: {
-                printf("Come again soon and have a nice day!\n");
-                break;
-            }
-            // Option 24 represents exiting live mode
-            case 24: {
                 printf("Your total bill is €%.2f.\n", totalBill);
                 printf("Thank you for your custom. Please come again soon!\n");
                 break;
             }
-            // Default case handles product selection
+            case 24: {
+                printf("Come again soon and have a nice day!\n");
+                return;
+                break;
+            }
             default: {
-                // Check if the selected product index is out of bounds
                 if (select > s.index + 1 || select <= 0) {
                     printf("\n** Invalid entry - please try again! **\n");
                     break;
                 }
 
-                // Prompt the user to input the quantity of the selected product
                 printf("How many %s would you like to purchase? ", s.stock[select - 1].product.name);
                 scanf("%d", &quantity_requested);
                 quantity_chosen = quantity_requested;
 
-                // Calculate the total cost based on the selected quantity
                 totalCost = quantity_chosen * findProductPrice(s.stock[select - 1].product.name);
 
-                // Check if the budget is insufficient for the chosen quantity
                 if (myBudget < totalCost) {
                     quantity_chosen = myBudget / findProductPrice(s.stock[select - 1].product.name);
                 }
 
-                // Check and update the actual quantity based on the available stock
                 quantity_chosen = checkProductStock(s.stock[select - 1].product.name, quantity_chosen);
 
-                // Update budget, total bill, and shop's cash based on the purchase
                 myBudget -= totalCost;
                 totalBill += totalCost;
                 s.cash += totalCost;
 
-                // Print details of the purchased product and transaction
                 printProduct(s.stock[select - 1].product);
+                printf("---------------\n");
                 printf("QUANTITY REQUIRED: %d\n", quantity_requested);
                 printf("QUANTITY PURCHASED: %d\n", quantity_chosen);
                 printf("TOTAL ITEM COST: €%.2f\n", totalCost);
                 printf("ADJUSTED BUDGET: €%.2f\n", myBudget);
                 printf("(ADJUSTED SHOP FLOAT: €%.2f\n", s.cash);
                 printf("TOTAL BILL SO FAR: €%.2f\n", totalBill);
+                printf("---------------\n");
 
-                // Notify if the purchased quantity is less than requested due to budget constraints
                 if (quantity_requested != quantity_chosen) {
                     printf("\n** You don't have enough money for %s! **\n", s.stock[select - 1].product.name);
                 }
             }
         }
+    // This is to allow the code to continue executing once these cases
+    // are not selected    
+    } while (select != 23 && select != 24);
 }
-        // Repeat the loop until the user selects 9 or 10
-    while (select != 23 && select != 24);
-}
+
 
 // Print info about each customer and their shopping list
 // Bool used for the customer shopping, if its false it skips the function
@@ -304,9 +302,9 @@ void printCustomer(bool upd) {
 void mainMenu(struct Shop s) {
     int menuSelect;
     do {
-        printf("\n/////////////////////\n");
+        printf("\n***********************\\n");
         printf("WELCOME TO THE C SHOP\n");
-        printf("/////////////////////\n");
+        printf("***********************\\n");
         printf("\nPlease select from the following:\n\n");
         printf("1 - Show shop's current stock and float\n");
         printf("2 - John's shopping list\n");
@@ -316,6 +314,7 @@ void mainMenu(struct Shop s) {
         printf("0 - Exit\n");
         printf("\nPlease make a selection: ");
         scanf("%d", &menuSelect);
+        // Switch allows to select each case and execute it
         switch (menuSelect) {
             case 1: {
                 printShop(s);
@@ -350,6 +349,7 @@ void mainMenu(struct Shop s) {
                 break;
             }
         }
+    // if the selection is not 0, it is true    
     } while (menuSelect != 0);
 }
 
@@ -359,6 +359,7 @@ int main()
     
     // create shop
     struct Shop newShop = createAndStockShop();
+    // newShop is the representation if each option chosen
     mainMenu(newShop);
     return 0;
 }
