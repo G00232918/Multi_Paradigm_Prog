@@ -151,10 +151,11 @@ def liveMode(shop):
         print("*24* - Exit Live Mode\n")
 
         choice = int(input("Please make your selection: "))
-
+        
         if choice == 23:
             print("\n--------------------\n")
-            print("Come again soon and have a nice day!\n")
+            print(f"Your total bill is €{totalBill:.2f}\n")
+            print("Thank you for your custom. Please come again soon!\n")
             print("--------------------\n")
             break
 
@@ -187,8 +188,7 @@ def liveMode(shop):
 
         elif choice == 24:
             print("\n--------------------\n")
-            print(f"Your total bill is €{totalBill:.2f}\n")
-            print("Thank you for your custom. Please come again soon!\n")
+            print("Come again soon and have a nice day!\n")
             print("--------------------\n")
             break
 
@@ -198,7 +198,9 @@ def liveMode(shop):
     shop.cash += totalBill
 
 def mainMenu():
-    print("\n***Welcome to the python proc shop***\n")
+    print("\n***********************\n");
+    print("WELCOME TO THE OOP Pythom SHOP\n");
+    print("***********************\n");
     print("Please select from the following: \n")
     print("1 - Show shop's current stock and float")
     print("2 - John's shopping list")
