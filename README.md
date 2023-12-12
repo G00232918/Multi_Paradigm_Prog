@@ -6,7 +6,7 @@
 
 ### Problem statement
 
-The propose of the project was to create a Shop Program in both C programming language and Python. For the shop in Python, we have to create the shop in the Procedural programming methoolgy and in Object Orientated programming based on the functionality requirements set by the lecturer.
+The purpose of the project was to create a Shop Program in both C programming language and Python. For the shop in Python, we have to create the shop in the Procedural programming methoolgy and in Object Orientated programming based on the functionality requirements set by the lecturer.
 
 #### Contents of the folder:
 * C - Contains the c program with a.exe, which is 
@@ -25,7 +25,7 @@ the compiled version to run.
 - Python 3
 - pdf
 
-#### How to clone this repository
+#### How to run the programs
 
 Please compile the c program before running and ensure that your terminal or command line program you are using has UTF-8 encoding enabled. To complie enter:
 
