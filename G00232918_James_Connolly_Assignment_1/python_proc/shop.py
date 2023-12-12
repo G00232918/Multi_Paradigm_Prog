@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
 import csv
+import sys
 
 # Setting the data classes for shop elements
 @dataclass
@@ -40,14 +41,15 @@ def create_and_stock_shop():
 
 # Print the product name and price
 def print_product(p):
-    print(f'---------------\nPRODUCT NAME: {p.name} \nPRODUCT PRICE: {p.price}\n--------------')
+    print(f'---------------\nPRODUCT NAME: {p.name} \nPRODUCT PRICE: €{p.price:.2f}\n--------------')
+
 
 # Print the product with the quantity
 def print_shop(s):
     print(f'Shop has {s.cash} in cash')
     for item in s.stock:
         print_product(item.product)
-        print(f'The Shop has {item.quantity} of the above')
+        print(f'The Shop has {int(item.quantity)} of the above')
 
 # Function to check product stock
 def check_prod_stock(n, quantity, shop):
@@ -196,6 +198,7 @@ def liveMode(shop):
             print("\n** Invalid entry - please try again! **\n")
 
     shop.cash += totalBill
+    mainMenu()
 
 def mainMenu():
     print("\n***********************\n");
@@ -239,8 +242,8 @@ def shopMenu(shop):
             liveMode(shop)
 
         elif choice == "0":
-            print("\n** Bye! Thanks for your custom! **\n** Come again soon! **\n")
-            exit()
+            print("\n** Bye! Thanks for your custom! **\n Come again soon!\n")
+            sys.exit()
 
         else:
             print("** Invalid entry - please enter a number between 0 and 5! **")

@@ -36,6 +36,7 @@ struct Shop s;
 
 // Printing product info
 void printProduct(struct Product p) {
+    printf("-------------\n");
     printf("PRODUCT NAME: %s \nPRODUCT PRICE: %.2f\n", p.name, p.price);
     printf("-------------\n");
 }
@@ -281,6 +282,7 @@ void printCustomer(bool upd) {
                 c.budget -= cost;
                 s.cash += cost;
                 totalBill += cost;
+                printf("---------------");
                 printProduct(c.shoppingList[i].product);
                 printf("QUANTITY REQUIRED: %d\n", c.shoppingList[i].quantity);
                 printf("QUANTITY PURCHASED: %d\n", QC);
@@ -288,6 +290,7 @@ void printCustomer(bool upd) {
                 printf("ADJUSTED BUDGET: €%.2f\n", c.budget);
                 printf("(ADJUSTED SHOP FLOAT: €%.2f)\n", s.cash);
                 printf("TOTAL BILL SO FAR: €%.2f\n", totalBill);
+                printf("---------------");
             }
         }
     }
@@ -336,7 +339,9 @@ void mainMenu(struct Shop s) {
                 break;
             }
             case 5: {
+                printf("\n////////////////////////////////////////////");
                 printf("\nYou are now entering our LIVE SHOPPING MODE!\n");
+                printf("\n////////////////////////////////////////////");
                 liveMode();
                 break;
             }

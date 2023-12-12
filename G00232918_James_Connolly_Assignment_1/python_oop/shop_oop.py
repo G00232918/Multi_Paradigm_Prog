@@ -27,7 +27,6 @@ class ProductStock:
     def cost(self):
         return self.itemPrice() * self.quantity
     # String representation of the product stock and quantity    
-   
     def __repr__(self):
         return f"{self.product}\nQUANTITY REQUIRED: {int(self.quantity)}\n"
 
